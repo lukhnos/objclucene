@@ -13114,6 +13114,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -13122,6 +13123,11 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = (
+					"-Wno-unreachable-code",
+					"-Wno-incompatible-pointer-types",
+					"-Wno-bitwise-op-parentheses",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -13136,6 +13142,7 @@
 			buildSettings = {
 				ADDITIONAL_SDKS = "";
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -13144,6 +13151,11 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = (
+					"-Wno-unreachable-code",
+					"-Wno-incompatible-pointer-types",
+					"-Wno-bitwise-op-parentheses",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
