@@ -28,10 +28,6 @@ for the App Store.
 This should be considered an experimental project, and there are a number of
 issues that I've already found:
 
-* There are some small leaks in reading and searching with the index. I've
-  already fixed some of them, but there are still some leaks that will require
-  further investigation.
-* There are more leaks to be fixed in index writers.
 * The translated `AnalyzingInfixSuggester` does not produce correct suggestion
   indices. It *reads* indices built elsewhere fine. I don't know why that is
   so. Perhaps some byte ordering or some Java-to-Objective-C nuances
@@ -45,5 +41,12 @@ for more information.
 Building the Xcode Project
 --------------------------
 
-To build the Xcode project, make sure that you have j2objc installed in
-`vendor/j2objc`. You can run the script `setup-j2objc.sh` to do that for you.
+To build the Xcode project, set up the J2ObjC dependencies first. If you
+haven't installed it, [download version 2.8](https://github.com/google/j2objc/releases/tag/2.8)
+from its GitHub releases page. After you have made sure that the command
+`j2objc` exists in your `PATH`, run the script:
+
+  ./setup-j2objc.sh
+
+This creates a symlink to where your j2objc lives and enables the project to be
+built correctly.
